@@ -1,7 +1,7 @@
 // visitor.js
 
 // 👇 Use your actual working API Gateway endpoint
-const API_URL = "https://41e8ori00h.execute-api.ap-south-1.amazonaws.com/count";
+const API_URL = "https://2orz1wo0m6.execute-api.ap-south-1.amazonaws.com/count";
 
 
 /**
