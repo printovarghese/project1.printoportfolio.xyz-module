@@ -3,7 +3,6 @@
 // 👇 Use your actual working API Gateway endpoint
 const API_URL = "https://2orz1wo0m6.execute-api.ap-south-1.amazonaws.com/count";
 
-
 /**
  * Adds ordinal suffix like 1st, 2nd, 3rd...
  */
@@ -20,26 +19,17 @@ async function updateVisitorCount() {
   el.innerText = "Loading visitor count...";
 
   try {
+    // IMPORTANT: your API returns plain text, not JSON
     const resp = await fetch(API_URL, { method: "GET" });
+    const textValue = await resp.text();   // <-- FIXED HERE
+    const count = parseInt(textValue);
 
-    if (!resp.ok) {
-      console.error("Non-OK response from visitor API", resp.status, resp.statusText);
+    if (isNaN(count)) {
+      console.error("API did not return a number:", textValue);
       el.innerText = "Welcome! (visitor count unavailable)";
       return;
     }
 
-    const data = await resp.json();
-
-    // ✅ Handle both { "visits": 12 } or { "count": 12 }
-    const count = data.visits ?? data.count ?? null;
-
-    if (count === null) {
-      console.warn("Visitor API responded but count not found:", data);
-      el.innerText = "Welcome! (visitor count unavailable)";
-      return;
-    }
-
-    // ✅ Display the visitor count
     el.innerHTML = `Hello there! You’re the <b>${ordinal(count)}</b> visitor<br>Thank you for visiting 💖`;
 
   } catch (err) {
@@ -48,5 +38,4 @@ async function updateVisitorCount() {
   }
 }
 
-// Automatically run on page load
 document.addEventListener("DOMContentLoaded", updateVisitorCount);
