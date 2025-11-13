@@ -1,0 +1,36 @@
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+crash.log
+*.tfplan
+
+# Lambda (Python)
+__pycache__/
+*.pyc
+
+# Node (optional future use)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+
+# Logs
+*.log
+
+# Binaries
+*.exe
+*.zip
+*.tar
+*.tar.gz
+
+# Environment/keys
+.env
+*.pem
+*.key
